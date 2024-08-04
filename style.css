@@ -8,9 +8,15 @@ body {
   background-color: #f5f5f5;
 }
 #navbar {
-  height: 60px;
+  height: 70px;
   width: 100%;
   background-color: #d3d3d3;
+}
+#navbar img {
+  height: 150px;
+  width: 150px;
+  margin-top: -40px;
+  padding: 10px;
 }
 main {
   width: 100%;
@@ -159,7 +165,10 @@ main {
 
 @media (max-width: 480px) {
   #navbar {
-    height: 50px;
+    height: 70px;
+  }
+  #navbar img {
+    margin-left: -24px;
   }
   #greeting {
     font-size: 20px;
