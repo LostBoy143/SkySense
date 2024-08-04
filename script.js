@@ -29,35 +29,17 @@ async function checkWeather() {
 
 async function getLocation() {
   try {
-    navigator.permissions
-      .query({ name: "geolocation" })
-      .then((result) => {
-        if (result.state === "granted") {
-          navigator.geolocation.getCurrentPosition(
-            (position) => {
-              const { latitude, longitude } =
-                position.coords;
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const { latitude, longitude } =
+          position.coords;
 
-              console.log(
-                `Latitude: ${latitude}`
-              );
-              console.log(
-                `Longitude: ${longitude}`
-              );
+        console.log(`Latitude: ${latitude}`);
+        console.log(`Longitude: ${longitude}`);
 
-              locationWeather(
-                latitude,
-                longitude
-              );
-            }
-          );
-        } else if (result.state === "prompt") {
-          alert(
-            "Please enter coordinates for location"
-          );
-        }
-        // Don't do anything if the permission was denied.
-      });
+        locationWeather(latitude, longitude);
+      }
+    );
   } catch (error) {
     console.error(
       "Error getting location:",
@@ -94,7 +76,7 @@ async function changes(response) {
     humidity.innerHTML =
       data?.main?.humidity + "%";
     condition.innerHTML =
-      data.weather[0].description;
+      data?.weather[0].description;
     switch (data?.weather[0]?.main) {
       case "Mist":
         weatherIcon.src = "images/mist.png";
