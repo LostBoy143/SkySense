@@ -150,20 +150,7 @@ function getTime() {
 }
 getTime();
 
-//function for hourly forecast
-function showArticles() {
-  articles.forEach((article) => {
-    if (article.style.display == "none") {
-      article.style.display = "flex";
-      document.getElementById("btn-img").src =
-        "images/arrow-up.png";
-    } else {
-      article.style.display = "none";
-      document.getElementById("btn-img").src =
-        "images/arrow-down.png";
-    }
-  });
-}
+//function for daily forecast
 
 const btn = document.getElementById(
   "forecast-button"
@@ -175,8 +162,12 @@ btn.onclick = function showArticles() {
       article.style.display == "none"
     ) {
       article.style.display = "flex";
+      document.getElementById("btn-img").src =
+        "images/arrow-up.png";
     } else {
       article.style.display = "none";
+      document.getElementById("btn-img").src =
+        "images/arrow-down.png";
     }
   });
 };
