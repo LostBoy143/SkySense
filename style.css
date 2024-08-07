@@ -6,11 +6,52 @@
 }
 body {
   background-color: #f5f5f5;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  -webkit-tap-highlight-color: transparent;
+}
+.icons-container {
+  width: 180px;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  overflow: hidden;
+  padding: 10px;
+  margin-right: 20px;
+}
+.icons {
+  height: 40px;
+  width: 40px;
+  background-color: #f5f5f5;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: 0.5s;
+}
+.icons:hover {
+  transform: scale(1.2);
+}
+#git-icon {
+  background: url("images/icons8-github.gif");
+  background-size: contain;
+}
+#link-icon {
+  background: url("images/icons8-linkedin.gif");
+  background-size: contain;
+}
+#twi-icon {
+  background: url("images/icons8-twitter.gif");
+  background-size: contain;
+  height: 35px;
+  width: 35px;
 }
 #navbar {
   height: 70px;
   width: 100%;
   background-color: #d3d3d3;
+  display: flex;
+  justify-content: space-between;
 }
 #navbar img {
   height: 150px;
@@ -20,19 +61,36 @@ body {
 }
 main {
   width: 100%;
+  flex: 1;
 }
-/* footer {
-  height: 100px;
+.hero {
+  height: 130px;
+  width: 100%;
+
+  /* margin: 50px 50px 0 50px; */
+  background: url("images/sunset-img.png");
+  background-size: 100% 250px;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+footer {
+  height: 70px;
   width: 100%;
   background-color: #d3d3d3;
-  
-} */
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  margin-top: 20px;
+}
 #greeting {
   font-size: 30px;
   font-weight: 500;
-  color: #2f4f4f;
+  /* color: #2f4f4f; */
+  color: #faf4f4;
   text-align: center;
-  margin: 50px 50px 0 50px;
+
   text-shadow: 1px 1px 1px #243030;
 }
 
@@ -46,6 +104,66 @@ main {
   padding: 40px 35px;
   text-align: center;
 }
+.future-card {
+  width: 90%;
+  max-width: 470px;
+  background-color: #d3d3d3;
+  color: #2f4f4f;
+  margin: 50px auto 50px auto;
+  border-radius: 20px;
+  padding: 20px 35px;
+  text-align: center;
+  display: none;
+}
+#forecast-button img {
+  height: 20px;
+  width: 20px;
+}
+
+#content {
+  height: 70px;
+  width: 100%;
+  border-bottom: 1px solid #f5f5f5;
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  align-items: center;
+  font-size: 22px;
+  padding-bottom: 10px;
+}
+#content button {
+  height: 30px;
+  width: 50px;
+  border-radius: 50%;
+  border: 0;
+  outline: none;
+  background: #ebfffc;
+  border-radius: 30px;
+  box-shadow: 3px 3px 3px #555;
+  transition: 1s;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#content button:active {
+  transform: scale(0.8);
+}
+
+.articles {
+  height: 60px;
+  width: 100%;
+  border: 1px solid #f5f5f5;
+  display: none;
+}
+.box {
+  height: 100%;
+  width: 25%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .search {
   width: 100%;
   display: flex;
@@ -89,6 +207,7 @@ main {
 }
 .search button:active {
   background-color: aqua;
+  transform: scale(0.8);
 }
 .search button img {
   width: 16px;
@@ -166,20 +285,66 @@ main {
 @media (max-width: 480px) {
   #navbar {
     height: 70px;
+    /* margin-bottom: 80px; */
   }
   #navbar img {
     margin-left: -24px;
   }
+  .icons-container {
+    width: 120px;
+    margin-right: 5px;
+  }
+  .icons {
+    height: 30px;
+    width: 30px;
+  }
+  #twi-icon {
+    height: 28px;
+    width: 28px;
+  }
   #greeting {
     font-size: 20px;
     font-weight: 400;
-    margin: 30px 30px 0 30px;
   }
   .card {
     width: 95%;
     border-radius: 20px;
     padding: 20px 0px;
     margin: 40px auto;
+  }
+  .hero {
+    border-radius: 0;
+    margin-top: 0;
+    background-size: cover;
+  }
+  .future-card {
+    width: 95%;
+    border-radius: 20px;
+    padding: 20px 0px;
+    margin: 40px auto;
+  }
+  .articles {
+    font-size: 12px;
+    padding-left: 3px;
+  }
+  #content {
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    align-items: center;
+    font-size: 16px;
+  }
+  #content button {
+    height: 30px;
+    width: 50px;
+    border-radius: 50%;
+    border: 0;
+    outline: none;
+    background: #ebfffc;
+    border-radius: 30px;
+    box-shadow: 3px 3px 3px #555;
+    transition: 1s;
   }
   .search {
     width: 100%;

@@ -1,3 +1,10 @@
+// import { futureForecast } from "./future.js";
+const card = document.querySelector(
+  ".future-card"
+);
+const hero = document.querySelector(".hero");
+const articles =
+  document.querySelectorAll(".articles");
 const temp = document.querySelector(".temp");
 const city = document.querySelector(".city");
 const wind = document.querySelector(".wind");
@@ -9,33 +16,35 @@ const weatherIcon = document.querySelector(
   ".weather-icon"
 );
 const apiKey = "d0552aed6597258e5012b6d443bfb6f3";
-
+// function to return the weather of the input of location
 async function checkWeather() {
   try {
     let cityNameVal = document.querySelector(
       "#input-field"
     );
     const cityName = cityNameVal.value;
-    const URL = `https://api.openweathermap.org/data/2.5/weather?units=metric&q=${cityName}&appid=${apiKey}`;
+    if (cityName !== "") {
+      const URL = `https://api.openweathermap.org/data/2.5/weather?units=metric&q=${cityName}&appid=${apiKey}`;
 
-    const response = await fetch(URL);
+      const response = await fetch(URL);
 
-    changes(response);
-    cityNameVal.value = "";
+      changes(response);
+    } else {
+      document.querySelector(
+        ".error"
+      ).style.display = "block";
+    }
   } catch (error) {
     alert("Error fetching weather data", error);
   }
 }
-
+//function to get the current location
 async function getLocation() {
   try {
     navigator.geolocation.getCurrentPosition(
       (position) => {
         const { latitude, longitude } =
           position.coords;
-
-        console.log(`Latitude: ${latitude}`);
-        console.log(`Longitude: ${longitude}`);
 
         locationWeather(latitude, longitude);
       }
@@ -48,6 +57,7 @@ async function getLocation() {
     alert("Error getting location");
   }
 }
+//function to get the weather of current location
 
 const locationWeather = async (
   latitude,
@@ -55,9 +65,11 @@ const locationWeather = async (
 ) => {
   const URL = `https://api.openweathermap.org/data/2.5/weather?units=metric&lat=${latitude}&lon=${longitude}&appid=${apiKey}`;
   const response = await fetch(URL);
+
   changes(response);
-  //   console.log(data);
 };
+
+//function for changes
 async function changes(response) {
   if (response.status === 404) {
     document.querySelector(
@@ -68,6 +80,16 @@ async function changes(response) {
     ).style.display = "none";
   } else {
     const data = await response.json();
+
+    //getting searched location coordinates
+    const lat = data?.coord?.lat;
+    const lon = data?.coord?.lon;
+    // getForecast(lat, lon);
+    futureForecast(lat, lon);
+    document.querySelector(
+      "footer"
+    ).style.position = "static";
+    card.style.display = "block";
     temp.innerHTML =
       Math.round(data?.main?.temp) + "°C";
     city.innerHTML = data?.name;
@@ -76,7 +98,7 @@ async function changes(response) {
     humidity.innerHTML =
       data?.main?.humidity + "%";
     condition.innerHTML =
-      data?.weather[0].description;
+      data?.weather[0]?.description;
     switch (data?.weather[0]?.main) {
       case "Mist":
         weatherIcon.src = "images/mist.png";
@@ -108,7 +130,7 @@ async function changes(response) {
     ).style.display = "none";
   }
 }
-//for background
+//for greeting it will take the current location and show the greeting according to the time
 function getTime() {
   const now = new Date();
   const hours = now.getHours();
@@ -127,3 +149,34 @@ function getTime() {
   ).innerHTML = `${greeting}, Welcome!`;
 }
 getTime();
+
+//function for hourly forecast
+function showArticles() {
+  articles.forEach((article) => {
+    if (article.style.display == "none") {
+      article.style.display = "flex";
+      document.getElementById("btn-img").src =
+        "images/arrow-up.png";
+    } else {
+      article.style.display = "none";
+      document.getElementById("btn-img").src =
+        "images/arrow-down.png";
+    }
+  });
+}
+
+const btn = document.getElementById(
+  "forecast-button"
+);
+btn.onclick = function showArticles() {
+  articles.forEach((article) => {
+    if (
+      !article.style.display ||
+      article.style.display == "none"
+    ) {
+      article.style.display = "flex";
+    } else {
+      article.style.display = "none";
+    }
+  });
+};
