@@ -66,8 +66,6 @@ main {
 .hero {
   height: 130px;
   width: 100%;
-
-  /* margin: 50px 50px 0 50px; */
   background: url("images/sunset-img.png");
   background-size: 100% 250px;
   margin: auto;
@@ -255,7 +253,9 @@ footer {
   filter: brightness(20%);
 }
 .humidity,
-.wind {
+.wind,
+.aqi,
+.precipitation {
   font-size: 28px;
   margin-top: -6px;
 }
@@ -268,6 +268,25 @@ footer {
   text-align: left;
   display: none;
 }
+footer {
+  height: 70px;
+  width: 100%;
+  background-color: #d3d3d3;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 4px;
+}
+footer p {
+  color: #2f4f4f;
+  font-size: 14px;
+}
+
 /*animations*/
 
 @keyframes myMove {
@@ -399,11 +418,19 @@ footer {
     color: black;
   }
   .humidity,
-  .wind {
+  .wind,
+  .precipitation,
+  .aqi {
     font-size: 16px;
     margin-top: -4px;
   }
+  #air {
+    margin-right: 12px;
+  }
   .para {
     font-size: 14px;
+  }
+  footer p {
+    font-size: 10px;
   }
 }

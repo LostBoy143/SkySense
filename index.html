@@ -14,7 +14,7 @@
     />
     <title>SkySense</title>
     <script defer src="script.js"></script>
-    <script defer src="future.js"></script>
+    <script defer src="forecast.js"></script>
   </head>
   <body>
     <nav id="navbar">
@@ -51,11 +51,7 @@
             id="input-field"
           />
           <div class="buttons">
-            <button
-              type="submit"
-              id="search-btn"
-              onclick="checkWeather()"
-            >
+            <button type="submit" id="search-btn">
               <img src="images/search.png"
               height:"50px" width:"50px" />
             </button>
@@ -92,6 +88,23 @@
               <div>
                 <div class="wind">15 km/h</div>
                 <p class="para">Wind Speed</p>
+              </div>
+            </div>
+          </div>
+          <div class="details">
+            <div class="col">
+              <img src="images/preci.png" />
+              <div>
+                <div class="precipitation"></div>
+                <p class="para">Precipitation</p>
+              </div>
+            </div>
+
+            <div class="col" id="air">
+              <img src="images/aqi.png" />
+              <div>
+                <div class="aqi"></div>
+                <p class="para">Air Quality</p>
               </div>
             </div>
           </div>
@@ -200,6 +213,12 @@
         </div>
       </div>
     </main>
-    <footer></footer>
+    <footer>
+      <p>
+        "Stay updated with the latest weather
+        forecasts!"
+      </p>
+      <p>© 2024 SkySense. All rights reserved.</p>
+    </footer>
   </body>
 </html>

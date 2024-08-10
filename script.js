@@ -63,10 +63,14 @@ const locationWeather = async (
   latitude,
   longitude
 ) => {
-  const URL = `https://api.openweathermap.org/data/2.5/weather?units=metric&lat=${latitude}&lon=${longitude}&appid=${apiKey}`;
-  const response = await fetch(URL);
+  try {
+    const URL = `https://api.openweathermap.org/data/2.5/weather?units=metric&lat=${latitude}&lon=${longitude}&appid=${apiKey}`;
+    const response = await fetch(URL);
 
-  changes(response);
+    changes(response);
+  } catch {
+    alert("Slow internet connection");
+  }
 };
 
 //function for changes
@@ -80,12 +84,13 @@ async function changes(response) {
     ).style.display = "none";
   } else {
     const data = await response.json();
-
+    console.log(data);
     //getting searched location coordinates
     const lat = data?.coord?.lat;
     const lon = data?.coord?.lon;
     // getForecast(lat, lon);
     futureForecast(lat, lon);
+    getAqi(lat, lon);
     document.querySelector(
       "footer"
     ).style.position = "static";
@@ -171,3 +176,11 @@ btn.onclick = function showArticles() {
     }
   });
 };
+async function getAqi(lat, lon) {
+  const URL = `https://api.weatherbit.io/v2.0/current/airquality?lat=${lat}&lon=${lon}&key=de415dabbdb8424e8f587ddd756d520b`;
+  const response = await fetch(URL);
+  const data = await response.json();
+  console.log(data);
+  document.querySelector(".aqi").innerText =
+    data?.data[0]?.aqi;
+}
